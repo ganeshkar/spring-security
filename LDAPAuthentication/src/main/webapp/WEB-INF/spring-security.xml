@@ -7,6 +7,7 @@
 	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<sec:http>
+		<!-- We will allow to access any secured url if the user is authenticated -->
 		<sec:intercept-url pattern="/secure**" access="isAuthenticated()" />
 		<sec:form-login />
 		<sec:logout logout-success-url="/"/>
@@ -27,6 +28,7 @@
 		<constructor-arg>
 			<bean id="bindAuthenticator"
 				class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<!-- Primary context source -->
 				<constructor-arg ref="contextSource" />
 				<property name="userSearch" ref="userSearch" />
 			</bean>
@@ -35,8 +37,11 @@
 	
 	<bean id="userSearch"
 		class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+		<!-- Primary domain -->
 		<constructor-arg index="0" value="DC=example,DC=com" />
+		<!-- Search will be done based on uid -->
 		<constructor-arg index="1" value="(uid={0})" />
+		<!-- Primary context source -->
 		<constructor-arg index="2" ref="contextSource" />
 	</bean>
 	
@@ -45,6 +50,7 @@
 		<constructor-arg>
 			<bean id="bindAuthenticator"
 				class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<!-- We can use a secondary contextSource if required -->
 				<constructor-arg ref="contextSource" />
 				<property name="userSearch" ref="userSearchSec" />
 			</bean>
@@ -53,8 +59,11 @@
 	
 	<bean id="userSearchSec"
 		class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+		<!-- The Secondary domain -->
 		<constructor-arg index="0" value="DC=test,DC=com" />
+		<!-- Search will be done based on uid -->
 		<constructor-arg index="1" value="(uid={0})" />
+		<!-- We can use a secondary contextSource if required -->
 		<constructor-arg index="2" ref="contextSource" />
 	</bean>
 </beans>

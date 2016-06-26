@@ -6,10 +6,12 @@
 	
 	<display-name>LDAPWeb</display-name>
 	
+	<!-- The welcome page -->
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
+	<!-- Spring MVC Servlet maping -->
 	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -31,6 +33,7 @@
 		</param-value>
 	</context-param>
 
+	<!-- Filter Mapping for Spring Security -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
