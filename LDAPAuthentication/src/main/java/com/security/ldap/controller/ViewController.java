@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ViewController {
 
 	@RequestMapping(value = { "/", "/index**" }, method = RequestMethod.GET)
-	public ModelAndView welcomePage() {
+	public ModelAndView publicPage() {
 
 		ModelAndView model = new ModelAndView();
 		model.setViewName("index");
@@ -18,7 +18,7 @@ public class ViewController {
 	}
 
 	@RequestMapping(value = "/securedaccess**", method = RequestMethod.GET)
-	public ModelAndView adminPage() {
+	public ModelAndView securePage() {
 
 		ModelAndView model = new ModelAndView();
 		model.setViewName("secured");
